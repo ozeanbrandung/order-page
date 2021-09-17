@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './CartItem.module.css';
 
 const CartItem = (props) => {
-  const {id, name, price, amount, removeItem, addItem} = props;
+  const {name, price, amount, removeItem, addItem} = props;
   //const price = `$${props.price.toFixed(2)}`;
 
   return (

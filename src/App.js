@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './App.css';
 //CUSTOM COMPONENTS
 import Header from './components/layout/Header';
@@ -15,9 +15,19 @@ function App() {
     setCartVisibility(false)
   }
 
-  const openCart = () => {
+  //useCallback - для сохранения функции в памяти и послед. оптимизации 
+  //приложения с пом. memo() - см компонент, куда передается эта функция
+  const openCart = useCallback(() => {
     setCartVisibility(true)
-  }
+    //передаем зависимости
+    //функицю из useState можно не передавать, React и так гарантирует, что 
+    //она одна и та же 
+  }, [])
+  //если мы используем какие-то другие переменные или констаныт внутри сохраненной 
+  //функции то их надо добавить в массив записимостей, а то они сохранятся навсегда
+  //какие есть, потому что функции в js - closures 
+  //% if (valid) {setCartVisibility(true)} - valid в зависимотси потому что 
+  //это переменная из другого state и нам нужно чтобы она меняласьб
 
   return (
     <CartContextProvider>
